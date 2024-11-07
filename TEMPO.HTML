@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Tempo Decorrido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .timer {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .timer h1 {
+            margin: 0 0 10px;
+        }
+        .time {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="timer">
+    <h1>Tempo Decorrido desde 10/08/2018</h1>
+    <div class="time" id="elapsedTime">Calculando...</div>
+</div>
+
+<script>
+    function updateTimer() {
+        // Definindo a data de início
+        const startDate = new Date('2018-08-10T00:00:00');
+        const now = new Date();
+
+        // Calculando a diferença em milissegundos
+        let difference = now - startDate;
+
+        // Convertendo a diferença para componentes de tempo
+        const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
+        difference %= 1000 * 60 * 60 * 24 * 365.25;
+
+        const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.44));
+        difference %= 1000 * 60 * 60 * 24 * 30.44;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        difference %= 1000 * 60 * 60 * 24;
+
+        const hours = Math.floor(difference / (1000 * 60 * 60));
+        difference %= 1000 * 60 * 60;
+
+        const minutes = Math.floor(difference / (1000 * 60));
+        difference %= 1000 * 60;
+
+        const seconds = Math.floor(difference / 1000);
+
+        // Atualizando o conteúdo da página
+        document.getElementById("elapsedTime").innerHTML = `
+            ${years} anos, ${months} meses, ${days} dias, ${hours} horas, 
+            ${minutes} minutos e ${seconds} segundos
+        `;
+    }
+
+    // Atualiza o temporizador a cada segundo
+    setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>
